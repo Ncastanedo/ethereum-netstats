@@ -223,8 +223,8 @@ angular.module('netStatsApp.filters', [])
 	}
 })
 .filter('validatorColorFilter', function() {
-	return function(hash) {
-		if(typeof hash === 'undefined' || !hash)
+	return function(hash, isMining) {
+		if(typeof hash === 'undefined' || !hash || !isMining)
 			return "text-gray";
 
 		if(hash.substr(0,2) === '0x')
@@ -234,8 +234,8 @@ angular.module('netStatsApp.filters', [])
 	}
 })
 .filter('proposerColorFilter', function() {
-	return function(hash) {
-		if (typeof hash === 'undefined' || !hash)
+	return function(hash, isMining) {
+		if (typeof hash === 'undefined' || !hash || !isMining)
 			return "text-gray";
 
 		if(hash.substr(0,2) === '0x')
