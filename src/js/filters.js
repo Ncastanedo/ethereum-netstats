@@ -26,6 +26,11 @@ angular.module('netStatsApp.filters', [])
 	  	return 'icon-loader';
 	};
 })
+.filter('nodeUpAndSyncClass', function() {
+	return function(node, bestBlock) {
+		return nodeUpAndSyncClass(node, bestBlock);
+	}
+})
 .filter('mainClass', function() {
 	return function(node, bestBlock) {
 	  	return mainClass(node, bestBlock);
@@ -676,6 +681,14 @@ function compareVersions(v1, comparator, v2)
 	return eval('0' + comparator + cmp);
 }
 
+function nodeUpAndSyncClass(node, bestBlock) {
+	if ( ! node.active)
+		return 'text-gray';
+	if ( node.peers === 0 || node.block.number + 10 < bestBlock)
+		return 'text-danger';
+	return 'text-success';
+}
+
 function mainClass(node, bestBlock)
 {
 	if( ! node.active)
@@ -683,8 +696,8 @@ function mainClass(node, bestBlock)
 
 	if(node.peers === 0)
 		return 'text-danger';
-
-	return peerClass(node.peers, node.active);
+	
+	return 'text-success';
 }
 
 function peerClass(peers, active)
