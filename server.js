@@ -189,10 +189,14 @@ api.on('connection', function (spark) {
         if (stats !== null) {
           client.write({
             action: 'pending',
-            data: stats
+            data: {
+                 pending: data.stats.pending,
+                 local: data.local,
+                 accounts: data.accounts
+            }
           })
 
-          console.debug('API', 'TXS', 'Pending:', data.stats['pending'], 'from:', data.id)
+	console.debug('API', 'TXS', 'Pending:', data.stats['pending'], 'Local:', data.local, 'Accounts:', data.accounts, 'from:', data.id)
         }
       })
     } else {
