@@ -190,9 +190,9 @@ api.on('connection', function (spark) {
           client.write({
             action: 'pending',
             data: {
-                 pending: data.stats.pending,
-                 local: data.local,
-                 accounts: data.accounts
+                 pending: data.stats && data.stats.pending ? data.stats.pending : null,
+                 local: data.local ? data.local : null,
+                 accounts: data.accounts ? data.accounts : null
             }
           })
 
